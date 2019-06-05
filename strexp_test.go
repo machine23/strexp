@@ -43,6 +43,13 @@ func TestStrExpand(t *testing.T) {
 		{"ba3", "baaa"},
 		{"abcd", "abcd"},
 		{"a4bc2d5e", "aaaabccddddde"},
+		{`\`, ""},
+		{`\\`, `\`},
+		{`\\5`, `\\\\\`},
+		{`\4`, "4"},
+		{`qwe\4\5`, "qwe45"},
+		{`qwe\45`, "qwe44444"},
+		{`qwe\\5`, `qwe\\\\\`},
 	}
 	for _, tt := range tests {
 		t.Run(tt.arg, func(t *testing.T) {

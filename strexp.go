@@ -25,9 +25,17 @@ func StrExpand(s string) string {
 	}
 	sr := []rune(s)
 	current := sr[0]
+	secondPart := sr[1:]
 	if _, err := strconv.Atoi(string(current)); err == nil {
 		return ""
 	}
-	n, rems := numFromStart(string(sr[1:]))
+	if current == '\\' {
+		if len(sr) < 2 {
+			return ""
+		}
+		current = sr[1]
+		secondPart = sr[2:]
+	}
+	n, rems := numFromStart(string(secondPart))
 	return strings.Repeat(string(current), n) + StrExpand(rems)
 }
